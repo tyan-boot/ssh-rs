@@ -1,5 +1,5 @@
 #![allow(non_camel_case_types)]
-use std::os::raw::{c_char, c_int, c_short, c_uchar, c_uint, c_ulong, c_ulonglong, c_void};
+use std::os::raw::{c_char, c_int, c_short, c_uchar, c_uint, c_ulong, c_void};
 
 use libc::timeval;
 
@@ -59,7 +59,7 @@ pub const SSH_FILEXFER_TYPE_UNKNOWN: c_int = 5;
 #[cfg(windows)]
 pub struct fd_set {
     pub fd_count: c_uint,
-    pub fd_array: [c_ulonglong; 64usize],
+    pub fd_array: [usize; 64usize],
 }
 
 #[cfg(unix)]
@@ -109,7 +109,10 @@ pub enum ssh_connector_struct {}
 pub type ssh_connector = *mut ssh_connector_struct;
 
 pub type ssh_gssapi_creds = *mut c_void;
+#[cfg(windows)]
 pub type socket_t = libc::SOCKET;
+#[cfg(not(windows))]
+pub type socket_t = libc::c_int;
 
 pub type ssh_auth_e = c_int;
 pub const SSH_AUTH_SUCCESS: ssh_auth_e = 0;

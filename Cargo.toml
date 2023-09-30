@@ -17,8 +17,6 @@ libc = { default-features = false, version = "0.2" }
 
 [build-dependencies]
 pkg-config = "0.3.16"
-bindgen = "0.68.1"
-
 
 [target.'cfg(windows)'.build-dependencies]
 vcpkg = "0.2.15"
